@@ -52,8 +52,9 @@ object[] CopyArrayStandartTool(params object[] inputArray)
 }
 int[] testArray=FillingArray();
 PrintIntArray(testArray);
-int[] outArray=(int[])CopyArrayStandartTool(testArray);
-PrintIntArray(outArray);
+
+//int[] outArray=(int[])CopyArrayStandartTool(testArray);
+//PrintIntArray(outArray);
 
 // string[] CopyArrayStandartTool(int[] inputArray)
 // {
