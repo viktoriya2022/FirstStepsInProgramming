@@ -1,0 +1,96 @@
+﻿
+//Генерируем массив
+int[,] GenTwoDimensionalArray(int m, int n, int min, int max)
+{
+    int i = 0, j = 0;
+    int[,] array = new int[m, n];
+
+    while (i < m)
+    {
+        j = 0;
+        while (j < n)
+        {
+            array[i, j] = numberSintezator.Next(min, max);
+            j++;
+        }
+        i++;
+    }
+    return array;
+}
+
+
+//Сортировка массива
+int[] Sort(int[] arr)
+{
+    int i, j, tmp, x;
+
+    for (i = 1; i < arr.Length; i++)
+    {
+        x = arr[i];
+        j = i;
+        while (j > 0 && arr[j - 1] > x)
+        {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            j -= 1;
+        }
+        arr[j] = x;
+    }
+
+    return arr;
+}
+
+//Построчная сортировка массива
+int[,] UpdateTwoDimensionalArray(int[,] inputArr)
+{
+    int[] array = new int[inputArr.GetLength(1)];
+
+    for (int i = 0; i < inputArr.GetLength(0); i++)
+    {
+        for (int j = 0; j < inputArr.GetLength(1); j++)
+        {
+            array[j] = inputArr[i, j];
+        }
+
+        array = Sort(array);
+
+        for (int j = 0; j < inputArr.GetLength(1); j++)
+        {
+            inputArr[i, j] = array[j];
+        }
+    }
+    return inputArr;
+}
+
+
+//Выводим на печать двумерный массив
+void PrintTwoDimensionalArray(int[,] arr)
+{
+    Console.WriteLine();
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            Console.Write(new string(' ', 3 - arr[i, j].ToString().Length));
+            Console.Write(arr[i, j] + (j != arr.GetLength(1) - 1 ? " " : ""));
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+//генератор случайных неповторяющихся чисел
+int UniqueRandomNumbers(int from, int to)
+{
+    Random rand = new();
+    int[] values = Enumerable.Range(from, to).ToArray();
+    int u = values.Length;
+    while (u > 0)
+    {
+        int y = rand.Next(u--);
+        return values[y];
+
+        (values[u], values[y]) = (values[y], values[u]);
+    }return u;
+}
